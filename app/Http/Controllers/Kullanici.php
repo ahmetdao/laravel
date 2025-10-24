@@ -16,6 +16,10 @@ class Kullanici extends Controller
     {
         return view('register');
     }
+    public function MagazaGoster()
+    {
+        return view('shop');
+    }
 
     public function uyeKaydet(Request $request)
     {

@@ -4,12 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kullanici;
 use App\Http\Controllers\IslemController;
 use App\Http\Controllers\Sehir;
+use App\Http\Controllers\HomeController;
 
 //hata almamak için tanımlama yapıyoruz
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'AnasayfaGoster'])->name('home');
 //Route::get('/giris-yap', function () {
  //   return view('login');
 //});
@@ -20,6 +19,8 @@ Route::get('/', function () {
 Route::get('/giris-yap', [Kullanici::class, 'girisYap'])->name('giris');
 Route::get('/uye-ol', [Kullanici::class, 'uyeOl'])->name('uyeol');
 Route::post('/uye-kaydet', [Kullanici::class, 'uyeKaydet'])->name('uyeKaydet');
+Route::get('/magaza', [Kullanici::class, 'MagazaGoster'])->name('magaza');
+
 //get ve post farkına dikkat et
 
 //Route::get('/sehir/{id}', function ($id) {
