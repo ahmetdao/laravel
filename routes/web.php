@@ -8,7 +8,7 @@ use App\Http\Controllers\HomeController;
 
 //hata almamak için tanımlama yapıyoruz
 
-Route::get('/', [HomeController::class, 'AnasayfaGoster'])->name('home');
+//Route::get('/', [HomeController::class, 'AnasayfaGoster'])->name('home');
 //Route::get('/giris-yap', function () {
  //   return view('login');
 //});
@@ -20,6 +20,8 @@ Route::get('/giris-yap', [Kullanici::class, 'girisYap'])->name('giris');
 Route::get('/uye-ol', [Kullanici::class, 'uyeOl'])->name('uyeol');
 Route::post('/uye-kaydet', [Kullanici::class, 'uyeKaydet'])->name('uyeKaydet');
 Route::get('/magaza', [Kullanici::class, 'MagazaGoster'])->name('magaza');
+Route::get('/bilgilerim', [Kullanici::class, 'BilgilerimGoster'])->middleware('OturumKontrol')->name('bilgilerim');
+Route::get('/', [HomeController::class, 'AnasayfaGoster'])->middleware('yayinKontrol')->name('home');
 
 //get ve post farkına dikkat et
 

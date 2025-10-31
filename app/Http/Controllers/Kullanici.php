@@ -20,6 +20,10 @@ class Kullanici extends Controller
     {
         return view('shop');
     }
+    public function BilgilerimGoster()
+    {
+        return view('bilgilerim');
+    }
 
     public function uyeKaydet(Request $request)
     {

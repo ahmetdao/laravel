@@ -57,10 +57,22 @@
       color: #666;
     }
   </style>
+
 </head>
 <body>
 
   <div class="login-card">
+    @if (session('hata'))
+    <div class="alert alert-danger">
+        {{ session('hata') }}
+    </div>
+@endif
+@if (session('uyari'))
+    <div class="alert alert-danger">
+        {{ session('uyari') }}
+    </div>
+@endif
+
     <div class="text-center mb-3">
       <i class="bi bi-person-circle fs-1 text-primary"></i>
     </div>
@@ -97,4 +109,5 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
