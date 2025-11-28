@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Uye;
 
 class Kullanici extends Controller
 {
@@ -27,23 +28,29 @@ class Kullanici extends Controller
 
     public function uyeKaydet(Request $request)
     {
-        // 1. Form verilerini doğrula
-        $validated = $request->validate([
+        $request->validate([
             'isim' => 'required|string|max:255',
-            'email' => 'required|email',
-            'parola' => 'required|min:6',
+            'soyad' => 'required|string|max:255',
+            'email' => 'required|email|unique:uyeler,e_posta',
+            'parola' => [
+                'required',
+                'string',
+                'min:8',             // Minimum 8 karakter
+                'confirmed',         // parola_confirmation ile eşleşmeli
+                'regex:/[A-Z]/',     // En az 1 büyük harf
+                'regex:/[@$!%*#?&]/', // En az 1 özel karakter
+            ],
         ]);
 
-        // 2. Şifreyi hashle
-        $hashedPassword = Hash::make($validated['parola']);
+        $veriler = $request->all();
 
-        // 3. Controller'da alt alta yazdır
-        echo "<h2>Kayıt Verileri</h2>";
-        echo "İsim: " . htmlspecialchars($validated['isim']) . "<br>";
-        echo "Email: " . htmlspecialchars($validated['email']) . "<br>";
-        echo "Şifre (Hashlenmiş): " . $hashedPassword . "<br>";
+        $uye = new Uye();
+        $uye->ad = $request->isim;
+        $uye->soyad = $request->soyad;
+        $uye->e_posta = $request->email;
+        $uye->parola = Hash::make($request->parola);
+        $uye->yetki = 0; // 0: Standart Üye
+        $uye->save();
 
-        // Eğer istersen scripti durdurabilirsin
-        // exit;
     }
 }

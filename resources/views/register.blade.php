@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,6 +70,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="register-box">
@@ -77,11 +79,27 @@
     </div>
     <h3>Kayıt Ol</h3>
 
-    <form action="/uye-kaydet" method="POST">  <!--//gönder butonuna tıklandığında formdan gelen veriler olacak bu verileri bu methodla bu sayfaya gönder demek -->
+    @if ($errors->any())
+      <div class="alert alert-danger text-start">
+        <ul class="mb-0">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
+
+    <form action="/uye-kaydet" method="POST">
+      <!--//gönder butonuna tıklandığında formdan gelen veriler olacak bu verileri bu methodla bu sayfaya gönder demek -->
       @csrf <!--dışarıdan gelen sunucu dışı verileri almıyor-->
       <div class="mb-3 text-start">
-        <label for="name" class="form-label">Ad Soyad</label>
+        <label for="name" class="form-label">Ad</label>
         <input type="text" class="form-control" id="name" name="isim" placeholder="Adınızı girin">
+      </div>
+
+      <div class="mb-3 text-start">
+        <label for="name" class="form-label">Soyad</label>
+        <input type="text" class="form-control" id="surname" name="soyad" placeholder="Soyadınızı girin">
       </div>
 
       <div class="mb-3 text-start">
@@ -96,7 +114,7 @@
 
       <div class="mb-3 text-start">
         <label for="confirm" class="form-label">Şifre (Tekrar)</label>
-        <input type="password" class="form-control" id="confirm" placeholder="">
+        <input type="password" class="form-control" id="confirm" name="parola_confirmation" placeholder="">
       </div>
 
       <div class="mb-3 form-check text-start">
@@ -116,4 +134,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

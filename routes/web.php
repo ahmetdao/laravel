@@ -10,10 +10,10 @@ use App\Http\Controllers\HomeController;
 
 //Route::get('/', [HomeController::class, 'AnasayfaGoster'])->name('home');
 //Route::get('/giris-yap', function () {
- //   return view('login');
+//   return view('login');
 //});
 //Route::get('/uye-ol', function () {
- //   return view('register');
+//   return view('register');
 //});
 //aşağıdaki gibi yaparsak rotanın yükü hafiflemiş olur rota sadece aracı olur yükü kontrollerle paylaşmış oldu projenin ölçeklendirilebilir ve daha düzenli daha kontrol edilebilir olmasını sağlar
 Route::get('/giris-yap', [Kullanici::class, 'girisYap'])->name('giris');
@@ -32,8 +32,12 @@ Route::get('/', [HomeController::class, 'AnasayfaGoster'])->middleware('yayinKon
 Route::get('/sehir/{id}', [Sehir::class, 'goster'])->name('sehir.goster');
 
 //Route::get('/topla/{sayi1}/{sayi2}', function ($sayi1, $sayi2) {
-  //  $toplam = $sayi1 + $sayi2;
-   // return view('topla', ['toplam' => $toplam, 'sayi1' => $sayi1, 'sayi2' => $sayi2]);
+//  $toplam = $sayi1 + $sayi2;
+// return view('topla', ['toplam' => $toplam, 'sayi1' => $sayi1, 'sayi2' => $sayi2]);
 //});
 
 Route::get('/topla/{sayi1}/{sayi2}', [IslemController::class, 'topla'])->name('topla');
+
+use App\Http\Controllers\VeriController;
+Route::get('/veri-ekle', [VeriController::class, 'create'])->name('veri.ekle');
+Route::post('/veri-ekle', [VeriController::class, 'store'])->name('veri.kaydet');
